@@ -1,0 +1,30 @@
+body {
+    font: 10px sans-serif;
+    height: 100vh;
+    margin: 0;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.y-tip {
+    stroke: blue;
+    stroke-dasharray: 3,3;
+    opacity: 0.5;
+}
+
+.line {
+    fill: none;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+#data{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
