@@ -2,7 +2,7 @@
 var maxWidth = document.querySelector('body');
 var maxHeight = document.querySelector('body');
 
-var margin = {top:0, right: 80, bottom: 30, left: 50},
+var margin = {top:30, right: 80, bottom: 30, left: 50},
     width = maxWidth.clientWidth - margin.left - margin.right,
     height = maxHeight.clientHeight / 2 - margin.top - margin.bottom,
 
@@ -48,8 +48,14 @@ var focus = svg.append("g")
 d3.json("years.json", function (error, data) {
     if (error) throw error;
 
-    data.forEach(function(i){
-        i.Year = new Date(i.Year, 0, 0, 0, 0);
+    data = data.map(function(i){
+        return {
+            Year:new Date(i.Year, 0, 0, 0, 0),
+            Glob: i.Glob,
+            NHem: i.NHem,
+            SHem: i.SHem
+        };
+        // i.Year = new Date(i.Year, 0, 0, 0, 0);
     });
 
     color.domain(d3.keys(data[0]).filter(function (key) {
@@ -111,18 +117,18 @@ d3.json("years.json", function (error, data) {
             return color(d.name);
         });
 
-    // city.append("text")
-    //     .datum(function (d) {
-    //         return {name: d.name, value: d.values[d.values.length - 1]};
-    //     })
-    //     .attr("transform", function (d) {
-    //         return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
-    //     })
-    //     .attr("x", 3)
-    //     .attr("dy", ".05em")
-    //     .text(function (d) {
-    //         return d.name;
-    //     });
+    city.append("text")
+        .datum(function (d) {
+            return {name: d.name, value: d.values[d.values.length - 1]};
+        })
+        .attr("transform", function (d) {
+            return "translate(" + x(d.value.date) + "," + y(d.value.temperature) + ")";
+        })
+        .attr("x", 3)
+        .attr("dy", ".05em")
+        .text(function (d) {
+            return d.name;
+        });
 
 
     // append the y tooltip
